@@ -1,0 +1,16 @@
+{
+	"configurations": [
+		{
+			"name": "immiscible (Flutter)",
+			"program": "lib/main.dart",
+			"request": "launch",
+			"type": "dart",
+			"args": [
+				"-d", "web-server",
+				"--web-hostname=192.168.1.201",
+				"--web-port=8080",
+				// "--release",
+			]
+		}
+	]
+}

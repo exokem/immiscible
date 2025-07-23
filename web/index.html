@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <!--
+	<!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
 
@@ -14,25 +15,119 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="$FLUTTER_BASE_HREF">
+	<base href="$FLUTTER_BASE_HREF">
+	<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+	<meta charset="UTF-8">
+	<meta content="IE=Edge" http-equiv="X-UA-Compatible">
+	<meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="bottles">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+	<!-- iOS meta tags & icons -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="bottles">
+	<link rel="apple-touch-icon" href="icons/Icon-192.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>bottles</title>
-  <link rel="manifest" href="manifest.json">
+	<title>Immiscible</title>
+	<link rel="manifest" href="manifest.json">
+	<style>
+		body, html {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+			/* font-size: 16px !important;
+			transform: none !important;
+			line-height: 1.2 !important;
+			margin: 0 !important;
+			zoom: 1 !important; */
+		}
+
+		#loading-screen {
+			z-index: 9999;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background-color: goldenrod;
+			text-align: center;
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			/* font-size: 16px !important;
+			transform: none !important;
+			line-height: 1.2 !important;
+			margin: 0 !important;
+			zoom: 1 !important; */
+		}
+
+		#loading-status {
+			font-size: 1.5rem;
+			/* font-size: 16px !important;
+			transform: none !important;
+			line-height: 1.2 !important;
+			margin: 0 !important;
+			zoom: 1 !important; */
+		}
+
+		#spinner {
+			border: 5px solid #f3f3f3;
+			border-top: 5px solid #3498db;
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			animation: spin 1s linear infinite;
+			margin: 20px auto;
+		}
+
+		.hidden {
+			display: none !important;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+
+		/* #start-app-btn {
+			padding: 10px 20px;
+			font-size: 16px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		#start-app-btn:hover {
+			background-color: #45a049;
+		} */
+
+	</style>
 </head>
+<!-- <script src="landing-page.js"></script> -->
+ 
+<!-- <script>{{flutter_bootstrap_js}}</script> -->
+
+
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+	<div id="loading-screen">
+		<p id="loading-status"></p>
+		<div id="spinner"></div>
+		
+		<!-- <button id="start-app-btn" style="display: none;">Start App</button> -->
+	</div>
 </body>
+
+<script src="flutter_bootstrap.js" defer></script>
+
 </html>
