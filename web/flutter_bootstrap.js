@@ -8,7 +8,7 @@ const loadingScreen = document.getElementById('loading-screen');
 loadingScreen.onclick = async () => {
 	if (isReady) {
 		loadingScreen.style.transition = 'transform 400ms ease-in-out';
-		loadingScreen.style.transform = 'translateX(-100vw)';
+		loadingScreen.style.transform = 'translateY(-100vh)';
 		await new Promise(resolve => setTimeout(resolve, 400));
 		if (document.documentElement.requestFullscreen) {
 			document.documentElement.requestFullscreen();

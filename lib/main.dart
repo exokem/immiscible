@@ -1,53 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fullscreen/flutter_fullscreen.dart' show FullScreen;
+import 'package:flutter/services.dart' show SystemUiMode;
+import 'package:flutter_fullscreen/flutter_fullscreen.dart' show FullScreen, FullScreenListener, isFullScreen;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FullScreen.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const AppWrapper());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AppWrapper extends StatelessWidget {
+  const AppWrapper({super.key});
+
+  final String title = 'Immiscible';
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Immiscible',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return Directionality(
+      textDirection: TextDirection.ltr, 
+      child: MaterialApp(
+        title: title,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        ),
+        home: App(title: title)
+      )
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class App extends StatefulWidget {
+  const App({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<App> createState() => _AppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  bool _isFullscreen = false;
+class _AppState extends State<App> with FullScreenListener {
+  bool isFullscreen = FullScreen.isFullScreen;
 
-  void _toggleFullscreen() {
-    setState(() {
-      _isFullscreen = !_isFullscreen;
-      FullScreen.setFullScreen(_isFullscreen);
-    });
+  @override
+  void initState() {
+    FullScreen.addListener(this);
+    super.initState();
+  }
+
+  @override dispose() {
+    FullScreen.removeListener(this);
+    super.dispose();
   }
 
   @override
+  void onFullScreenChanged(bool enabled, SystemUiMode? systemUiMode) {
+    setState(() {
+      isFullscreen = enabled;
+    });
+  }
+  
+  @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,9 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _toggleFullscreen,
-        tooltip: _isFullscreen ? 'Exit Fullscreen': 'Fullscreen',
-        child: Icon(_isFullscreen ? Icons.fullscreen_exit_rounded : Icons.fullscreen_rounded),
+        onPressed: () {
+          FullScreen.setFullScreen(!isFullscreen);
+        },
+        tooltip: isFullscreen ? 'Exit Fullscreen': 'Fullscreen',
+        child: Icon(isFullscreen ? Icons.fullscreen_exit_rounded : Icons.fullscreen_rounded),
       ),
     );
   }
