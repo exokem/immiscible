@@ -12,9 +12,9 @@ const spinner = document.getElementById('spinner');
 const progressBar = document.getElementById('progress-bar');
 
 const hideLoadingScreen = async () => {
-	if (document.documentElement.requestFullscreen) {
-		document.documentElement.requestFullscreen();
-	}
+	// if (document.documentElement.requestFullscreen) {
+	// 	document.documentElement.requestFullscreen();
+	// }
 	await new Promise(resolve => setTimeout(resolve, 200));
 	loadingScreen.style.transition = 'transform 800ms ease-in-out';
 	loadingScreen.style.transform = 'translateY(-100vh)';
